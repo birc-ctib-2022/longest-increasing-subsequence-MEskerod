@@ -31,4 +31,18 @@ def liseq(x: Sequence[Any]) -> list[int]:
     """
     best: list[int] = []
     # Explore all alternatives
+    for i in range(len(x)):
+        for j in range(i, len(x)):
+            current_list=[i]
+            if is_increasing([x[i],x[j]]):
+                current_list.append(j)
+                j+=1
+                while j<len(x):
+                    if is_increasing([x[j-1],x[j]]):
+                        current_list.append(j)
+                        j+=1
+                    else: 
+                        break
+                if len(current_list) > len(best):
+                    best = current_list                 
     return best
